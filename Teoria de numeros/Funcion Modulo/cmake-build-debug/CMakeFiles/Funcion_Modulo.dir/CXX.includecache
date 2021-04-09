@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Gabriel/Programming Projects/Clion Projects/Algebra Abstracta/Teoria de numeros/Funcion Modulo/main.cpp
+iostream
+-
+

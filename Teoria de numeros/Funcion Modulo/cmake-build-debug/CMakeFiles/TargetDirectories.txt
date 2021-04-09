@@ -1,0 +1,3 @@
+D:/Gabriel/Programming Projects/Clion Projects/Algebra Abstracta/Teoria de numeros/Funcion Modulo/cmake-build-debug/CMakeFiles/Funcion_Modulo.dir
+D:/Gabriel/Programming Projects/Clion Projects/Algebra Abstracta/Teoria de numeros/Funcion Modulo/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Gabriel/Programming Projects/Clion Projects/Algebra Abstracta/Teoria de numeros/Funcion Modulo/cmake-build-debug/CMakeFiles/rebuild_cache.dir

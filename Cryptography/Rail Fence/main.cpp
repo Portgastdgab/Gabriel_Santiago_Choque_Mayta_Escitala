@@ -4,7 +4,7 @@ using namespace std;
 
 class Rail_fance {
 private:
-    int clave = 5;
+    int clave = 6;
     int patron[2]; //patron de 2 variables que se repite en cada fila de la matriz
     int suma, cont = 0; //suma es la variable que se suma los saltos del patron para ir añadiendo a la variable palabra
                         //contador verificara si la vuelta en el bucle es par o impar
@@ -71,9 +71,9 @@ public:
 };
 
 int main() {
-    string mensaje = "Gabriel Santiago";
-    mensaje = Rail_fance().Chiper(mensaje);
-    cout << "Mensaje Cifrado: " << mensaje << endl;
+    string mensaje = "Heo slotama osc";
+    /*mensaje = Rail_fance().Chiper(mensaje);
+    cout << "Mensaje Cifrado: " << mensaje << endl;*/
     mensaje = Rail_fance().Deschiper(mensaje);
     cout << "Mensaje Decifrado: " << mensaje;
 }
