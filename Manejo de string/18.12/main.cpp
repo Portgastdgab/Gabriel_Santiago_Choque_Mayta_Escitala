@@ -3,58 +3,11 @@
 
 using namespace std;
 
-void dibujo(int vez){
-    switch (vez) {
-        case 0:{
-            cout<<" "<<endl;
-            break;
-        }
-        case 1:{
-            cout<<" 0 "<<endl;
-            break;
-        }
-        case 2:{
-            cout<<" 0 "<<endl;
-            cout<<" | "<<endl;
-            break;
-        }
-        case 3:{
-            cout<<" 0 "<<endl;
-            cout<<"/| "<<endl;
-            break;
-        }
-        case 4:{
-            cout<<" 0 "<<endl;
-            cout<<"/|\\"<<endl;
-            break;
-        }
-        case 5:{
-            cout<<" 0 "<<endl;
-            cout<<"/|\\"<<endl;
-            cout<<" |"<<endl;
-            break;
-        }
-        case 6:{
-            cout<<" 0 "<<endl;
-            cout<<"/|\\"<<endl;
-            cout<<" |"<<endl;
-            cout<<"/"<<endl;
-            break;
-        }
-        case 7:{
-            cout<<" 0 "<<endl;
-            cout<<"/|\\"<<endl;
-            cout<<" |"<<endl;
-            cout<<"/ \\"<<endl;
-        }
-    }
-}
-
 int main() {
     string palabras[] = {"gente", "humanidad", "humano", "persona", "hombre", "mujer", "bebe", "adolescente", "adulto",
                          "anciano", "pierna", "pie", "espinilla", "rodilla", "muslo", "cabeza", "cara", "parangaricutirimicuaro",
                          "abdomen", "cuello", "mente", "alma", "espalda"};
-
+    string dibujos[]={"\t      0","\n\t/","|","\\","\n\t |","\n\t/"," \\ \n\n"};
     char letra;
     int iter;
     string jugar;
@@ -81,12 +34,16 @@ int main() {
             else{
                 intentos++;
             }
+
+            for (int i = 0; i < intentos; ++i) {
+                cout<<dibujos[i];
+            }
+
             if (iter == elegida.size()){
                 cout<<"Felicidades!!! Adivino mi palabra. Desea jugar otra vez? si/no: ";
                 cin>>jugar;
                 break;
             }
-            dibujo(intentos);
             if (intentos == 7){
                 cout<<"MORISTE. Desea jugar otra vez? si/no: ";
                 cin>>jugar;
