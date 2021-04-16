@@ -1,40 +1,4 @@
-#include <NTL/ZZ.h>
-
-using namespace std;
-
-using namespace NTL;
-
-int main()
-
-{
-
-    ZZ a,b;
-
-    cin>>a>>b;
-
-    cout<<a*b;
-
-    return 0;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*#include <iostream>
+#include <iostream>
 
 using namespace std;
 
@@ -44,7 +8,7 @@ int modulo(int a, int n){
     return r;
 }
 
-int Euclides(int a, int b){
+/*int Euclides(int a, int b){
     if (modulo(a, b) == 0){
         return b;
     }
@@ -55,9 +19,19 @@ int Euclides(int a, int b){
         Euclides(a,b);
     }
 
+}*/
+
+int Euclides(int a, int b){
+    while (modulo(a, b) != 0){
+        int temp = b;
+        b = modulo(a, b);
+        a = temp;
+    }
+    return b;
+
 }
 
 int main() {
-    int mcd = Euclides(25, 5);
-    cout<<mcd;
-}*/
+    int mcd = Euclides(12, 8);
+    cout << mcd;
+}
