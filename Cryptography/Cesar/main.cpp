@@ -36,40 +36,54 @@ void bubbleSort(int arr[], int n, string &fre_alf)
 }
 
 void frecuencias(string mensaje) {
-    string alf_fre = "abcdefghijklmnopqrstuvwxyz ";
+    string alf_fre = Cesar().alfabeto;
+    string espanol_rep = " eaolsndyq";
     int frecuencia[alf_fre.size()];
     int contador;
-    for (int i = 0; i < Cesar().alfabeto.size(); ++i) {
+    for (int i = 0; i < alf_fre.size(); ++i) {
         contador = 0;
         for (int j = 0; j < mensaje.size(); ++j) {
-            if (Cesar().alfabeto[i] == mensaje[j]) {
+            if (alf_fre[i] == mensaje[j]) {
                 contador++;
             }
         }
         frecuencia[i] = contador;
     }
-    cout<<"Este es el conteo: ";
+    bubbleSort(frecuencia, alf_fre.size(), alf_fre);
+    cout<<endl<<endl<<"Estas son las letras de mayor frecuencia y las veces que aparecen: "<<endl;
     for (int i = 0; i < alf_fre.size(); ++i) {
         cout<<frecuencia[i]<<" ";
     }
+    cout<<endl;
+    for (int i = 0; i < alf_fre.size(); ++i) {
+        cout<<alf_fre[i]<<" ";
+    }
+    int posible_clave;
+    int iter = 0;
+    for (int i = 0; i < alf_fre.size(); ++i) {
+        posible_clave = (Cesar().alfabeto.find(alf_fre[iter])+1)-(Cesar().alfabeto.find(espanol_rep[iter])+1)%27;
+
+        if (posible_clave == (Cesar().alfabeto.find(alf_fre[iter+1])+1)-(Cesar().alfabeto.find(espanol_rep[iter+1])+1)%27){
+            break;
+        }
+        else{
+            if (i%2 == 0){
+                swap(frecuencia, iter, iter+1, alf_fre);
+            } else{
+                swap(frecuencia, iter, iter+1, alf_fre);
+                iter++;
+            }
+        }
+    }
+    cout<<endl<<"posible clave: "<<posible_clave;
 }
 
 int main() {
-    /*string mensaje = "deja ya de estar rezando y dandote golpes en el pecho lo que quiero que hagas es que salgas al mundo a disfrutar de tu vida quiero que goces que cantes que te diviertas y que disfrutes de todo";
+    string mensaje = "ontando las signos del texto cifrado y ordenandolos de mayor a menor frecuencia podemos establecer conjeturas acerca de que letra corresponde a cada signo";
     mensaje = Cesar().Cifrado(mensaje);
     cout << "Cifrado: " << mensaje << endl;
     //mensaje = Cesar().Descifrado(mensaje);
-    //cout<<"Descifrado: "<<mensaje;*/
-    int arr[] = {64, 34, 25, 12, 22, 11, 90};
-    int n = sizeof(arr)/sizeof(arr[0]);
-    string alfabet= "abcdefg";
-    bubbleSort(arr, n, alfabet);
-    for (int i = 0; i < n; ++i) {
-        cout<<arr[i]<<" ";
-    }
-    cout<<endl;
-    for (int i = 0; i < n; ++i) {
-        cout<<alfabet[i]<<" ";
-    }
+    //cout<<"Descifrado: "<<mensaje;
+    frecuencias(mensaje);
 
 }

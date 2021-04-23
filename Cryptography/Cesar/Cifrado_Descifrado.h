@@ -6,7 +6,7 @@ class Cesar {
 private:
 
     string palabra;
-    int clave = 157;
+    int clave = 16;
 
     int modulo(int a, int n);
 

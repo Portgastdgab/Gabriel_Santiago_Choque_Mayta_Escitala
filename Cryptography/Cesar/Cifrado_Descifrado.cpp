@@ -13,7 +13,7 @@ string Cesar::Cifrado(string mensaje) {
     return palabra;
 }
 
-string Cesar::Descifrado(string mensaje) {
+string Cesar::Descifrado(string mensaje, int key) {
     for (int i = 0; i < mensaje.size(); ++i) {
         palabra.push_back(alfabeto[modulo(((alfabeto.find(mensaje[i])) - clave), alfabeto.size())]);
     }
