@@ -1,89 +1,24 @@
 #include "Cifrado_Descifrado.h"
-
-
-
-void swap(int arr[], int pos1, int pos2, string &fre_alf)
-{
-    int temp = arr[pos1];
-    arr[pos1] = arr[pos2];
-    arr[pos2] = temp;
-    char temp2 = fre_alf[pos1];
-    //cout<<fre_alf[pos1]<<" = "<< fre_alf[pos2]<<endl;
-    //cout<<fre_alf[pos2]<<" = "<<temp2<<endl;
-    fre_alf[pos1] = fre_alf[pos2];
-    fre_alf[pos2] = temp2;
-
-
-}
-
-void bubbleSort(int arr[], int n, string &fre_alf)
-{
-    bool vuelta;
-    for (int i = 0; i < n-1; i++)
-    {
-        vuelta = false;
-        for (int j = 0; j < n-i-1; j++)
-        {
-            if (arr[j] < arr[j+1])
-            {
-                swap(arr, j, j+1, fre_alf);
-                vuelta = true;
-            }
-        }
-        if (vuelta == false)
-            break;
-    }
-}
-
-void frecuencias(string mensaje) {
-    string alf_fre = Cesar().alfabeto;
-    string espanol_rep = " eaolsndyq";
-    int frecuencia[alf_fre.size()];
-    int contador;
-    for (int i = 0; i < alf_fre.size(); ++i) {
-        contador = 0;
-        for (int j = 0; j < mensaje.size(); ++j) {
-            if (alf_fre[i] == mensaje[j]) {
-                contador++;
-            }
-        }
-        frecuencia[i] = contador;
-    }
-    bubbleSort(frecuencia, alf_fre.size(), alf_fre);
-    cout<<endl<<endl<<"Estas son las letras de mayor frecuencia y las veces que aparecen: "<<endl;
-    for (int i = 0; i < alf_fre.size(); ++i) {
-        cout<<frecuencia[i]<<" ";
-    }
-    cout<<endl;
-    for (int i = 0; i < alf_fre.size(); ++i) {
-        cout<<alf_fre[i]<<" ";
-    }
-    int posible_clave;
-    int iter = 0;
-    for (int i = 0; i < alf_fre.size(); ++i) {
-        posible_clave = (Cesar().alfabeto.find(alf_fre[iter])+1)-(Cesar().alfabeto.find(espanol_rep[iter])+1)%27;
-
-        if (posible_clave == (Cesar().alfabeto.find(alf_fre[iter+1])+1)-(Cesar().alfabeto.find(espanol_rep[iter+1])+1)%27){
-            break;
-        }
-        else{
-            if (i%2 == 0){
-                swap(frecuencia, iter, iter+1, alf_fre);
-            } else{
-                swap(frecuencia, iter, iter+1, alf_fre);
-                iter++;
-            }
-        }
-    }
-    cout<<endl<<"posible clave: "<<posible_clave;
-}
+#include "Criptoanalisis_frecuencias.h"
 
 int main() {
-    string mensaje = "ontando las signos del texto cifrado y ordenandolos de mayor a menor frecuencia podemos establecer conjeturas acerca de que letra corresponde a cada signo";
+    string mensaje = "deja ya de estar rezando y dandote golpes en el pecho lo que quiero\n"
+                     "que hagas es que salgas al mundo a disfrutar de tu vida\n"
+                     "\n"
+                     "quiero que goces que cantes que te diviertas y que disfrutes de todo lo\n"
+                     "que he hecho para ti\n"
+                     "deja ya de ir a esos templos lugubres, obscuros y frios que tu mismo\n"
+                     "construiste y que dices que son mi casa.\n"
+                     "mi casa esta en las montanas en los bosques los ríos los lagos las\n"
+                     "playas ahi es en donde vivo y ahi expreso mi amor por ti\n"
+                     "deja ya de culparme de tu vida miserable yo nunca te dije que habia\n"
+                     "nada mal en ti o que eras un pecador o que tu sexualidad fuera algo\n"
+                     "malo";
     mensaje = Cesar().Cifrado(mensaje);
     cout << "Cifrado: " << mensaje << endl;
-    //mensaje = Cesar().Descifrado(mensaje);
-    //cout<<"Descifrado: "<<mensaje;
     frecuencias(mensaje);
+    mensaje = Cesar().Descifrado(mensaje);
+    cout<<"\n\n\nDescifrado: "<<mensaje;
+
 
 }
