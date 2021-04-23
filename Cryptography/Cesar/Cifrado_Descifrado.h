@@ -6,13 +6,11 @@ class Cesar {
 private:
 
     string palabra;
-    int clave = 16;
 
     int modulo(int a, int n);
 
 public:
     string alfabeto = "abcdefghijklmnopqrstuvwxyz ";
-    string Cifrado(string mensaje);
-
-    string Descifrado(string mensaje);
+    string Emisor(string mensaje, int clave);
+    string Receptor(string mensaje, int clave);
 };

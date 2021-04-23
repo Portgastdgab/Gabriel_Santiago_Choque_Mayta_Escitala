@@ -27,7 +27,7 @@ void bubbleSort(int arr[], int n, string &fre_alf) {
     }
 }
 
-void frecuencias(string mensaje) {
+string frecuencias(string mensaje) {
     string alf_fre = Cesar().alfabeto;
     string espanol_rep = " eaolsndyq";
     int frecuencia[alf_fre.size()];
@@ -42,14 +42,15 @@ void frecuencias(string mensaje) {
         frecuencia[i] = contador;
     }
     bubbleSort(frecuencia, alf_fre.size(), alf_fre);
-    cout << endl << endl << "Estas son las letras de mayor frecuencia y las veces que aparecen: " << endl;
-    for (int i = 0; i < alf_fre.size(); ++i) {
-        cout << frecuencia[i] << " ";
-    }
-    cout << endl;
+    cout << endl << endl << "Estas son las letras de mayor frecuencia y las veces que aparecen: " << endl<<endl;
     for (int i = 0; i < alf_fre.size(); ++i) {
         cout << alf_fre[i] << " ";
     }
+    cout << endl;
+    for (int i = 0; i < alf_fre.size(); ++i) {
+        cout << frecuencia[i] << " ";
+    }
+    cout<<endl;
     int posible_clave;
     int iter = 0;
     for (int i = 0; i < alf_fre.size(); ++i) {
@@ -68,4 +69,6 @@ void frecuencias(string mensaje) {
         }
     }
     cout << endl << "posible clave: " << posible_clave;
+    mensaje = Cesar().Receptor(mensaje, posible_clave);
+    return mensaje;
 }
