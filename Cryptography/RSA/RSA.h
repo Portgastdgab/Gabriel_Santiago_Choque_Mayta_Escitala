@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <vector>
 #include "../../Funciones/Funciones.h"
@@ -10,9 +11,7 @@ public:
 
     RSA(int, int);
 
-    virtual ~RSA(void);
-
-    int exponenciacion(int, int);
+//    virtual ~RSA(void);
 
     int resto_chino(int);
 
@@ -34,4 +33,4 @@ private:
     int p;
     int q;
     string alfabeto;
-};
+};*/

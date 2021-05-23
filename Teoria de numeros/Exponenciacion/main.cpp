@@ -11,7 +11,6 @@ int modular_exponentiation(int base, int exponent, int mod){
         if (module(exponent, 2)){
             reply = module(reply*base, mod);
         }
-        cout<<"base = "<<base<<"   reply = "<<reply<<"   exponent = "<<exponent<<endl;
         exponent/=2;
     }
     return reply;

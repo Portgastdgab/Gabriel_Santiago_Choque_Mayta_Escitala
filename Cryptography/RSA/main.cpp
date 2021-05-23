@@ -1,6 +1,8 @@
 #include <iostream>
-#include "RSA.h"
+#include "../../Funciones/Funciones.h"
+
+using namespace std;
 
 int main() {
-    RSA().hacer(17);
+
 }
