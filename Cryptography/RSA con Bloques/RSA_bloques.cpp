@@ -7,10 +7,10 @@ RSA::RSA(int bits) {
     //Como srand funciona con el tiempo de la PC se asignaria los mismos valores para p, q y e; para evitar esto
     // a la variable p y q les sumo 123 y 321 al tamaño de el vector prime_bits, consigo un numero random en el intevalo
     // y le saco el modulo para q el valor este entre 0 y el tamaño de prime_bits
-    p = 17;//random_prime[module(random(123, 123 + random_prime.size()), random_prime.size() - 1)];
-    q = 59;//random_prime[module(random(321, 321 + random_prime.size()), random_prime.size() - 1)];
-    e = 3;//random_prime[random(0, random_prime.size() - 1)];
-    N = 1003;//p * q;
+    p = random_prime[module(random(123, 123 + random_prime.size()), random_prime.size() - 1)];
+    q = random_prime[module(random(321, 321 + random_prime.size()), random_prime.size() - 1)];
+    e = random_prime[random(0, random_prime.size() - 1)];
+    N = p * q;
     oN = (p-1)*(q-1);
     while (mcd(e, oN) != 1) { //si el mcd(e, oN) != 1, busco otro primo tal que mcd(e, oN) == 1
         e = random_prime[random(0, random_prime.size() - 1)];
@@ -34,32 +34,60 @@ void RSA::chiper(string mssg) {
     }
     string numbers_text;
 
-    for (int i = 0;i < mssg.size(); ++i) { //convierte las posiciones y luego añade los ceros
+    cout<<"convierte las posiciones y luego anade los ceros"<<endl;
+    for (int i = 0;i < mssg.size(); ++i) { //convierte las posiciones y luego anade los ceros
+        cout<<add_zeros(int_to_string(alfabeto.find(mssg[i])), int_to_string(alfabeto.size()).size())<<" ";
         numbers_text.append(add_zeros(int_to_string(alfabeto.find(mssg[i])), int_to_string(alfabeto.size()).size()));
     }
     mssg = numbers_text;
+
+    cout<<endl<<"Bloques segun N-1"<<endl;
     vector <string> division_for_N;
     division_to_string(division_for_N, mssg, ((int_to_string(N)).size())-1);
+    for (int i = 0; i < division_for_N.size(); ++i) {
+        cout<<division_for_N[i]<<" ";
+    }
     vector <int> mssg_empower;
+
+    cout<<endl<<"Bloques segun N-1 en numeros"<<endl;
     division_to_int(mssg_empower, division_for_N);
+    for (int i = 0; i < mssg_empower.size(); ++i) {
+        cout<<mssg_empower[i]<<" ";
+    }
+    cout<<endl<<"C^e)mod N"<<endl;
     for (int i = 0; i < mssg_empower.size(); ++i) { // (C^e)mod N
         mssg_empower[i] = modular_exponentiation(mssg_empower[i], e, N);
+        cout<<mssg_empower[i]<<" ";
     }
     for (int i = 0;i < mssg_empower.size(); ++i) { //convierte las posiciones a string con los ceros añadidos
         encrypted_letter.append(add_zeros(int_to_string(mssg_empower[i]), int_to_string(N).size()));
     }
+
 }
 
 void RSA::dechiper(string letters) {
     vector <string> division_for_N;
+
+    cout<<endl<<endl<<endl<<"Bloques segun N-1"<<endl;
     division_to_string(division_for_N, letters, int_to_string(N).size());
+    for (int i = 0; i < division_for_N.size(); ++i) {
+        cout<<division_for_N[i]<<" ";
+    }
+    cout<<endl<<"Bloques segun N-1 con numeros"<<endl;
     vector <int> mssg_empower;
     division_to_int(mssg_empower, division_for_N);
     for (int i = 0; i < mssg_empower.size(); ++i) {
+        cout<<mssg_empower[i]<<" ";
+    }
+    cout<<endl<<"(C^d)mod N"<<endl;
+    for (int i = 0; i < mssg_empower.size(); ++i) {
         mssg_empower[i] = modular_exponentiation(mssg_empower[i], d, N);
+        cout<<mssg_empower[i]<<" ";
     }
     letters = "";
+    cout<<endl<<"Primer anadida en bloques de N-1"<<endl;
     for (int i = 0; i < division_for_N.size(); ++i) {
+        cout<<add_zeros(int_to_string(mssg_empower[i]), int_to_string(N).size()-1)<<" ";
         letters.append(add_zeros(int_to_string(mssg_empower[i]), int_to_string(N).size()-1));
     }
 
