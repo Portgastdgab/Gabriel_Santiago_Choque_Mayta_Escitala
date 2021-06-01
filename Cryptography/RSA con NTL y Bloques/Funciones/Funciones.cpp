@@ -1,52 +1,55 @@
 #include "Funciones.h"
 
-int module(int a, int n){
+ZZ module(ZZ a, ZZ n){
+    ZZ r = a-n*(a/n);
+    r = r+(r<0)*n;
+    return r;
+}
+
+int module_int(int a, int n){
     int r = a-n*(a/n);
     r = r+(r<0)*n;
     return r;
 }
 
-int recursive_Euclid(int a, int b){
-    if (module(a, b) == 0){
-        return b;
+ZZ empower(ZZ a, int x){
+    ZZ b = ZZ(x);
+    ZZ reply = a;
+    for(ZZ i = ZZ(1); i < b; i++){
+        reply = a*reply;
     }
-    else   {
-        int temp = b;
-        b = module(a, b);
-        a = temp;
-        recursive_Euclid(a,b);
-    }
+    return reply;
 }
 
-int Euclid(int a, int b){
-    while (module(a, b) != 0){
-        int temp = b;
+ZZ Euclid(ZZ a, ZZ b){
+    while (module(a, b) != ZZ(0)){
+        ZZ temp = b;
         b = module(a, b);
         a = temp;
     }
     return b;
 }
 
-int mcd(int a, int b){
+ZZ mcd(ZZ a, ZZ b){
     return Euclid(a, b);
 }
 
-int Euclid_extended(int a, int b) {
+ZZ Euclid_extended(ZZ a, ZZ b) {
     int cont = 0;
-    int temp1 = a;
-    int temp2 = b;
-    while (module(a, b) != 0) {
-        int temp = b;
+    ZZ temp1 = a;
+    ZZ temp2 = b;
+    while (module(a, b) != ZZ(0)) {
+        ZZ temp = b;
         b = module(a, b);
         a = temp;
         cont++;
     }
     cont = cont + 2;
-    int g[cont];
+    ZZ g[cont];
     g[0] = temp1;
     g[1] = temp2;
 
-    int y[cont], u[cont], v[cont];
+    ZZ y[cont], u[cont], v[cont];
     u[0] = 1, u[1] = 0, v[0] = 0, v[1] = 1;
     for (int i = 1;; ++i) {
         y[i + 1] = g[i - 1] / g[i];
@@ -61,16 +64,16 @@ int Euclid_extended(int a, int b) {
     }
 }
 
-int inverse(int a, int b){
+ZZ inverse(ZZ a, ZZ b){
     return Euclid_extended(a, b);
 }
 
-int modular_exponentiation(int base, int exponent, int mod){
-    int reply = base;
+ZZ modular_exponentiation(ZZ base, ZZ exponent, ZZ mod){
+    ZZ reply = base;
     exponent/=2;
-    while (exponent){
+    while (exponent != ZZ(0)){
         base = module(base*base, mod);
-        if (module(exponent, 2)){
+        if (module(exponent, ZZ(2)) != ZZ(0)){
             reply = module(reply*base, mod);
         }
         exponent/=2;
@@ -83,21 +86,21 @@ int random(int begin, int end) {
     return begin + rand() % (end - begin);
 }
 
-vector<int> criba_eratostenes(int limit)
+vector <ZZ> criba_eratostenes(ZZ limit)
 {
-    vector<int> criba;
-    int prime_found;  // primos que se vayan encontrando
+    vector<ZZ> criba;
+    ZZ prime_found;  // primos que se vayan encontrando
 
     // llenando el vector desde 2 hasta limit
-    for (int i = 2; i <= limit; i++)
+    for (ZZ i = ZZ(2); i <= limit; i++)
         criba.push_back(i);
 
-    if (limit == 2 || limit == 3)
+    if (limit == ZZ(2) || limit == ZZ(3))
         return criba;
 
     // iteradores para la seleccion
-    vector<int>::iterator it = criba.begin();
-    vector<int>::iterator it2;
+    vector<ZZ>::iterator it = criba.begin();
+    vector<ZZ>::iterator it2;
     prime_found = *it;  // El primer primo es 2
 
     while (prime_found*prime_found < limit)
@@ -105,7 +108,7 @@ vector<int> criba_eratostenes(int limit)
         it2 = it + 1;
 
         for(; it2 <= criba.end(); it2++) //Borra multiplos de los primos hallados
-            if(*it2 % prime_found == 0)
+            if(module(*it2, prime_found) == 0)
                 criba.erase(it2);
         it++;
         prime_found = *it;
@@ -115,10 +118,10 @@ vector<int> criba_eratostenes(int limit)
 }
 
 
-vector <int> prime_bits(int bit){ //devuelve los elementos primos segun el numero de bits que pide
-    vector <int> primos = criba_eratostenes(pow(2, bit)-1);
-    vector<int>::iterator it = primos.begin();
-    while (*it < pow(2, bit)/2){
+vector <ZZ> prime_bits(int bit){ //devuelve los elementos primos segun el numero de bits que pide
+    vector <ZZ> primos = criba_eratostenes(empower(ZZ(2), bit)-ZZ(1));
+    vector<ZZ>::iterator it = primos.begin();
+    while (*it < empower(ZZ(2), bit)/ZZ(2)){
         primos.erase(it);
     }
     return primos;

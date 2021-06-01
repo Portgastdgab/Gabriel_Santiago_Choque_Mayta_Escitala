@@ -8,7 +8,7 @@ RSA::RSA(int bits) {
     // a la variable p y q les sumo 123 y 321 al tamaño de el vector prime_bits, consigo un numero random en el intevalo
     // y le saco el modulo para q el valor este entre 0 y el tamaño de prime_bits
     p = random_prime[module(random(123, 123 + random_prime.size()), random_prime.size() - 1)];
-    q = random_prime[module(random(321, 321 + random_prime.size()), random_prime.size() - 1)];
+    q = random_prime[module(random(321, 321 + random_prizme.size()), random_prime.size() - 1)];
     e = random_prime[random(0, random_prime.size() - 1)];
     N = p * q;
     oN = (p-1)*(q-1);
